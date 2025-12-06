@@ -1,0 +1,437 @@
+:root{
+  --bg: #f5f7fb;
+  --card-bg: #ffffff;
+  --muted: #6b7280;
+  --accent: linear-gradient(135deg,#4f46e5,#06b6d4);
+  --primary: #2563eb;
+  --danger: #ef4444;
+  --radius: 12px;
+  --gap: 22px;
+  --container-padding: 36px;
+  --max-width: 1200px;
+  --transition: 260ms cubic-bezier(.2,.9,.3,1);
+  --shadow-1: 0 6px 18px rgba(15,23,42,0.06);
+  --shadow-2: 0 12px 34px rgba(2,6,23,0.08);
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main section: center content with padding from corners */
+.main-section {
+  padding: var(--container-padding);
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Constrain content width */
+.section-post {
+  width: 100%;
+  max-width: var(--max-width);
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* Responsive grid for cards */
+.section-post ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--gap);
+}
+
+/* Card */
+.section-post li {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-1);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  border: 1px solid rgba(15,23,42,0.03);
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  overflow: hidden;
+}
+
+/* Hover lift */
+.section-post li:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-2);
+  border-color: rgba(15,23,42,0.06);
+}
+
+/* Header row: number + title */
+.post-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+/* Number badge */
+.post-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(34,197,94,0.08); /* slight green tint */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #16a34a; /* green */
+  margin-right: 10px;
+  font-size: 1rem;
+  flex: 0 0 34px;
+}
+
+/* Title */
+.post-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  color: #0b1220;
+}
+
+/* Body/excerpt (truncate to 3 lines) */
+.post-body {
+  margin: 8px 0 14px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Spacer to push actions to bottom */
+.post-flex-spacer {
+  flex: 1 1 auto;
+}
+
+/* Action buttons container */
+.post-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+/* Base button styles */
+.section-post button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.2px;
+  transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+  box-shadow: 0 6px 12px rgba(2,6,23,0.04);
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* EDIT button - GREEN */
+.btn-edit {
+  background: #22c55e;
+  color: white;
+  border: 1px solid #16a34a;
+}
+.btn-edit:hover { background: #16a34a; transform: translateY(-2px); }
+.btn-edit:active { transform: translateY(0); opacity: 0.95; }
+
+/* DELETE button - RED */
+.btn-delete {
+  background: #ef4444;
+  color: white;
+  border: 1px solid #dc2626;
+}
+.btn-delete:hover { background: #dc2626; transform: translateY(-2px); }
+.btn-delete:active { transform: translateY(0); }
+
+/* Focus states for accessibility */
+.section-post button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
+  border-radius: 8px;
+}
+
+/* Empty state */
+.section-post .empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Small screens adjustments */
+@media (max-width: 700px) {
+  .main-section { padding: 20px; }
+  .section-post ul { gap: 16px; }
+  .post-actions { justify-content: center; }
+}
+
+/* Limit wide displays to 3 equal columns */
+@media (min-width: 1400px) {
+  .section-post ul { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
+}
+
+
+/* ===== FORM CONTAINER ===== */
+.section-form {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 25px 28px;
+  margin: 30px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Each input group */
+.section-form div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Input styles */
+.section-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #f9fafb;
+  transition: 0.2s ease;
+}
+
+/* Input focus effect */
+.section-form input:focus {
+  outline: none;
+  border-color: #22c55e;      /* Green border */
+  box-shadow: 0 0 4px rgba(34,197,94,0.4);
+  background: #ffffff;
+}
+
+/* Placeholder styling */
+.section-form input::placeholder {
+  color: #9ca3af;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.section-form button {
+  padding: 12px;
+  background: #22c55e;      /* Green */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  transition: 0.25s ease;
+}
+
+/* Hover */
+.section-form button:hover {
+  background: #16a34a;      /* Darker green */
+  transform: translateY(-2px);
+}
+
+/* Active click */
+.section-form button:active {
+  transform: translateY(0);
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .section-form {
+    padding: 20px;
+  }
+}
+
+/* ========= FORM CONTAINER ========= */
+.section-form {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 25px 28px;
+  margin: 30px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Each input wrapper */
+.section-form div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Input fields */
+.section-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #f9fafb;
+  transition: 0.2s ease;
+}
+
+/* Input Focus */
+.section-form input:focus {
+  outline: none;
+  border-color: #22c55e; /* Green border */
+  box-shadow: 0 0 5px rgba(34, 197, 94, 0.4);
+  background: #ffffff;
+}
+
+/* Placeholder text */
+.section-form input::placeholder {
+  color: #9ca3af;
+}
+
+/* ========= SUBMIT BUTTON ========= */
+.section-form button {
+  padding: 12px;
+  background: #22c55e; /* Green */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: 0.25s ease;
+}
+
+/* Hover */
+.section-form button:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
+
+/* Active click */
+.section-form button:active {
+  transform: translateY(0);
+  opacity: 0.85;
+}
+
+/* Mobile spacing */
+@media (max-width: 600px) {
+  .section-form {
+    padding: 20px;
+  }
+}
+
+/* Ensure box-sizing (if not already present) */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Wrapper that stacks form above posts */
+.app-inner {
+  width: 100%;
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;   /* STACK vertically */
+  gap: 30px;                /* spacing between form and posts */
+  align-items: stretch;
+}
+
+/* Make sure form and posts remain in normal flow */
+.section-form,
+.section-post {
+  position: relative;  /* prevent accidental absolute positioning */
+  z-index: 1;
+}
+
+/* Extra safe spacing so posts never overlap */
+.section-form {
+  margin-bottom: 8px;
+}
+
+/* Ensure the posts grid clears any floats (if any) */
+.section-post::before {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Do not allow children to be positioned on top via negative margin */
+.section-post ul,
+.section-form {
+  margin: 0;
+}
+
+/* Optional: ensure responsiveness so items reflow instead of overlap */
+@media (max-width: 900px) {
+  .app-inner { gap: 20px; padding: 0 18px; }
+}
+
+
+.posts-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;      /* center horizontally */
+  display: flex;
+  flex-direction: column;  /* stack vertical */
+  gap: 30px;               /* spacing between form and posts */
+}
+
+
+/* small helper */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* edit inputs */
+.edit-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  resize: vertical;
+}
+
+
